@@ -7,6 +7,10 @@ export default {
   components: {
     AppUpload,
   },
+  // beforeRouteLeave(to, from, next) {
+  //   this.$refs.upload.cancelUploads();
+  //   next();
+  // },
   // beforeRouteEnter(to, from, next) {
   //   const store = useUserStore();
 
@@ -26,7 +30,7 @@ export default {
   <section class="container mx-auto mt-6">
     <div class="md:grid md:grid-cols-3 md:gap-4">
       <div class="col-span-1">
-        <AppUpload />
+        <AppUpload ref="upload" />
       </div>
       <div class="col-span-2">
         <div class="bg-white rounded border border-gray-200 relative flex flex-col">

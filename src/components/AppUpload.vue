@@ -1,5 +1,5 @@
 <script>
-import { storage } from '@/includes/firebase';
+import { storage, auth, songsCollection } from '@/includes/firebase';
 
 export default {
   name: 'AppUpload',
@@ -7,7 +7,7 @@ export default {
     upload($event) {
       this.isDragover = false;
 
-      const files = [...$event.dataTransfer.files];
+      const files = $event.dataTransfer ? [...$event.dataTransfer.files] : [...$event.target.files];
       const storageRef = storage.ref(); // vue-music-app-4eb47.appspot.com
 
       files.forEach((file) => {
@@ -41,7 +41,18 @@ export default {
             this.uploads[uploadIndex].animation = '';
             console.log(error);
           },
-          () => {
+          async () => {
+            const song = {
+              uid: auth.currentUser.uid,
+              displayName: auth.currentUser.displayName,
+              originalName: task.snapshot.ref.name,
+              modifiedName: task.snapshot.ref.name,
+              genre: '',
+              comment_count: 0,
+            };
+            song.url = await task.snapshot.ref.getDownloadURL();
+            await songsCollection.add(song);
+
             this.uploads[uploadIndex].variant = 'bg-green-400';
             this.uploads[uploadIndex].icon = 'fas fa-check';
             this.uploads[uploadIndex].textClass = 'text-green-400';
@@ -51,12 +62,22 @@ export default {
       });
       console.log(files);
     },
+    cancelUploads() {
+      this.uploads.forEach((upload) => {
+        upload.task.cancel();
+      });
+    },
   },
   data() {
     return {
       isDragover: false,
       uploads: [],
     };
+  },
+  beforeUnmount() {
+    this.uploads.forEach((upload) => {
+      upload.task.cancel();
+    })
   },
 };
 </script>
@@ -82,6 +103,11 @@ export default {
       >
         <h5>Drop your files here</h5>
       </div>
+      <input
+        type="file"
+        mulitple
+        @change="upload($event)"
+      />
       <hr class="my-6" />
       <!-- Progess Bars -->
       <div
