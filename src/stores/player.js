@@ -13,8 +13,8 @@ export default defineStore('player', {
     async newSong(song) {
       this.currentSong = song;
 
-      if (this.sound.playing) {
-        this.sound.pause();
+      if (this.playing) {
+        this.sound.unload();
       }
 
       this.sound = new Howl({
@@ -42,7 +42,7 @@ export default defineStore('player', {
       this.seek = helper.formatTime(this.sound.seek());
       this.duration = helper.formatTime(this.sound.duration());
 
-      if (this.sound.playing()) {
+      if (this.playing) {
         requestAnimationFrame(this.progress);
       }
     },
