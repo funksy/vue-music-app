@@ -15,6 +15,7 @@ export default {
       this.songs[i].modifiedName = values.modifiedName;
       this.songs[i].genre = values.genre;
     },
+    //todo: remove comments when removing a song
     removeSong(i) {
       this.songs.splice(i, 1);
     },
