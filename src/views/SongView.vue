@@ -7,7 +7,7 @@ import usePlayerStore from '@/stores/player';
 export default {
   name: 'SongView',
   methods: {
-    ...mapActions(usePlayerStore, ['newSong']),
+    ...mapActions(usePlayerStore, ['newSong', 'toggleAudio']),
     async addComment(values, { resetForm }) {
       this.commentInSubmission = true;
       this.commentShowAlert = true;
@@ -47,9 +47,17 @@ export default {
         });
       });
     },
+    handlePlayButton() {
+      if (this.currentSongPage) {
+        this.toggleAudio;
+      } else {
+        this.newSong;
+      }
+    },
   },
   computed: {
     ...mapState(useUserStore, ['userLoggedIn']),
+    ...mapState(usePlayerStore, ['currentSong', 'sound', 'playing']),
     sortedComments() {
       return this.comments.slice().sort((a, b) => {
         if (this.sort === '1') {
@@ -58,6 +66,12 @@ export default {
 
         return new Date(a.datePosted) - new Date(b.datePosted);
       });
+    },
+    currentSongPage() {
+      if (this.song.url === this.currentSong.url) {
+        return true;
+      }
+      return false;
     },
   },
   watch: {
@@ -118,9 +132,12 @@ export default {
       <button
         type="button"
         class="z-50 h-24 w-24 text-3xl bg-white text-black rounded-full focus:outline-none"
-        @click.prevent="newSong(song)"
+        @click.prevent="currentSongPage ? toggleAudio() : newSong(song)"
       >
-        <i class="fas fa-play"></i>
+        <i
+          class="fas"
+          :class="currentSongPage && playing ? 'fa-pause' : 'fa-play'"
+        ></i>
       </button>
       <div class="z-50 text-left ml-8">
         <!-- Song Info -->
