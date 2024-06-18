@@ -21,7 +21,8 @@ export default {
       class="text-center"
       v-if="currentSong.modifiedName"
     >
-      <span class="song-title font-bold">{{ currentSong.modifiedName }}</span> by
+      <span class="song-title font-bold">{{ currentSong.modifiedName }} </span>
+      by
       <span class="song-artist">{{ currentSong.displayName }}</span>
     </div>
     <div class="flex flex-nowrap gap-4 items-center">
