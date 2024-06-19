@@ -2,10 +2,9 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
 import 'firebase/storage';
-import apiKey from '../../apiKey';
 
 const firebaseConfig = {
-  apiKey: apiKey,
+  apiKey: 'AIzaSyCQ0FbJ0mvMCLEkKg5LVV6TdbtL5lIUWTk',
   authDomain: 'vue-music-app-4eb47.firebaseapp.com',
   projectId: 'vue-music-app-4eb47',
   storageBucket: 'vue-music-app-4eb47.appspot.com',
