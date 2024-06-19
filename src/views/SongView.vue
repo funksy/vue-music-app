@@ -3,9 +3,13 @@ import { songsCollection, commentsCollection, auth } from '@/includes/firebase';
 import { mapState, mapActions } from 'pinia';
 import useUserStore from '@/stores/user';
 import usePlayerStore from '@/stores/player';
+import iconSecondary from '@/directives/iconSecondary';
 
 export default {
   name: 'SongView',
+  directives: {
+    'icon-secondary': iconSecondary,
+  },
   methods: {
     ...mapActions(usePlayerStore, ['newSong', 'toggleAudio']),
     async addComment(values, { resetForm }) {
@@ -153,10 +157,14 @@ export default {
       id="comments"
     >
       <div class="bg-white rounded border border-gray-200 relative flex flex-col">
-        <div class="px-6 pt-6 pb-5 font-bold border-b border-gray-200">
+        <div
+          class="px-6 pt-6 pb-5 font-bold border-b border-gray-200"
+          v-icon-secondary="{ icon: 'comments', color: 'green', right: true }"
+        >
           <!-- Comment Count -->
-          <span class="card-title">Comments {{ song.comment_count }}</span>
-          <i class="fa fa-comments float-right text-green-400 text-2xl"></i>
+          <span class="card-title">{{
+            $tc('song.comment_count', song.comment_count, { count: song.comment_count })
+          }}</span>
         </div>
         <div class="p-6">
           <div
