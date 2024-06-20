@@ -72,7 +72,7 @@ export default {
 <template>
   <main>
     <!-- Introduction -->
-    <section class="mb-8 py-20 text-white text-center relative">
+    <section class="mb-8 py-16 text-white text-center relative">
       <div
         class="absolute inset-0 w-full h-full bg-contain introduction-bg"
         style="background-image: url(assets/img/header.png)"
@@ -88,10 +88,10 @@ export default {
         </div>
       </div>
 
-      <img
+      <!-- <img
         class="relative block mx-auto mt-5 -mb-20 w-auto max-w-full"
         src="/assets/img/introduction-music.png"
-      />
+      /> -->
     </section>
 
     <!-- Main Content -->

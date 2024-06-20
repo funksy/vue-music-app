@@ -167,7 +167,7 @@ export default {
         >
           <!-- Comment Count -->
           <span class="card-title">{{
-            $tc('song.comment_count', song.comment_count, { count: song.comment_count })
+            $t('song.comment_count', song.comment_count, { count: song.comment_count })
           }}</span>
         </div>
         <div class="p-6">

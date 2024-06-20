@@ -46,14 +46,14 @@ export default {
         <!-- Primary Navigation -->
         <ul class="flex flex-row mt-1">
           <!-- Navigation Links -->
-          <li>
+          <!-- <li>
             <RouterLink
               class="px-2 text-white"
               :to="{ name: 'AboutView' }"
             >
               About
             </RouterLink>
-          </li>
+          </li> -->
           <li v-if="!userStore.userLoggedIn">
             <a
               class="px-2 text-white"
