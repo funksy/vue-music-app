@@ -161,14 +161,12 @@ export default {
       id="comments"
     >
       <div class="bg-white rounded border border-gray-200 relative flex flex-col">
-        <div
-          class="px-6 pt-6 pb-5 font-bold border-b border-gray-200"
-          v-icon-secondary="{ icon: 'comments', color: 'green', right: true }"
-        >
+        <div class="px-6 pt-6 pb-5 font-bold border-b border-gray-200">
           <!-- Comment Count -->
           <span class="card-title">{{
             $t('song.comment_count', song.comment_count, { count: song.comment_count })
           }}</span>
+          <i class="fa fa-comments text-xl text-green-400 float-right"></i>
         </div>
         <div class="p-6">
           <div
